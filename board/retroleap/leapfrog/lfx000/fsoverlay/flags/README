@@ -1,0 +1,6 @@
+This directory is used for flags that control the behavior of retroleap.
+
+To set a flag on the device, connect via ssh or serial and run 'touch /flags/<name_of_flag>'. To remove, just run 'rm /flags/<name_of_flag>'
+
+Supported flags:
+  no_menu - skip running respawn_menu.sh at boot.

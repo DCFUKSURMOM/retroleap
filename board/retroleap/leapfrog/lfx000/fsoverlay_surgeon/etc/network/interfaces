@@ -1,0 +1,9 @@
+# Configure Loopback
+auto lo
+iface lo inet loopback
+
+auto usb0
+iface usb0 inet static
+	address 169.254.8.1
+	network 169.254.8.0
+	netmask 255.255.255.0

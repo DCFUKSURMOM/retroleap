@@ -1,0 +1,27 @@
+#!/bin/sh
+case "$1" in
+  start)
+    if [[ -f /flags/didjfi ]]; then
+      echo "Didj-fi flag present. Trying to bring up the didj-fi board."
+      modprobe lf2000_sdhc polling=1
+	  #TODO: Make reset_gpio machine-dependent once LF1000 works with didjfi.
+	  modprobe esp8089 esp_reset_gpio=18
+      sleep 2
+      wpa_supplicant -B -i wlan0 -W -D nl80211 -c /etc/wpa_supplicant.conf
+      udhcpc -b -i wlan0
+      exit
+    fi
+	echo "Didj-fi flag not present. Bringing up SD without polling support."
+    modprobe lf2000_sdhc polling=1
+    ;;
+  stop)
+    rmmod esp8089
+	rmmod lf2000_sdhc
+    exit 1
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+exit 0

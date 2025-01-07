@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RETROARCH_ASSETS
+        bool "Retroarch Assets (~500MB)"
+        help
+          Asset files (icons, fonts, wallpapers, etc) for Retroarch. This is a very large package, over 500MB) 
+	  This package is optional, Retroarch will work fine without it, but will look and sound better with it.
+	  https://github.com/libretro/retroarch-assets

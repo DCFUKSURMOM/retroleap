@@ -1,0 +1,15 @@
+# Configure Loopback
+auto lo
+iface lo inet loopback
+
+auto usb0
+iface usb0 inet static
+	address 169.254.6.1
+	network 169.254.6.0
+	netmask 255.255.255.0
+
+auto wlan0
+iface wlan0 inet dhcp
+    wireless-essid wrt2
+    pre-up wpa_supplicant -B w -D wext -i wlan0 -c /etc/wpa_supplicant.conf -dd
+    post-down killall -q wpa_supplicant

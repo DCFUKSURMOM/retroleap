@@ -1,0 +1,21 @@
+#!/bin/sh
+case "$1" in
+  start)
+    if [[ -f /flags/no_shutdown_monitor ]]; then
+      echo "No shutdown monitor flag present...not starting shutdown monitor"
+      exit
+    fi
+    /usr/bin/shutdown_monitor.sh &
+    ;;
+  stop)
+    for KILLPID in `ps | grep 'shutdown_monitor.sh' | awk ' { print $1;}'`; do
+      kill -9 $KILLPID;
+    done
+    exit 1
+    ;;
+  *)
+    exit 1
+    ;;
+esac
+
+exit 0

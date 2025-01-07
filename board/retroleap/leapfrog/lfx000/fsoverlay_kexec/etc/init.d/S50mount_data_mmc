@@ -1,0 +1,55 @@
+#!/bin/sh
+BULK_PART="/dev/mmcblk0p4"
+MOUNT_POINT=/roms
+
+case "$1" in
+	start)
+
+		if grep $MOUNT_POINT /proc/mounts > /dev/null; then
+			echo "Data already mounted. Is this an MTD-based system with an SD card attached?"
+			exit 0;
+		fi
+
+		if [ ! -f "$BULK_PART" ]; then
+			echo "Bulk NAND partition not found. Probably an MMC system."
+			exit 0;
+		fi
+
+		if [ ! -e $MOUNT_POINT ]; then
+			echo "Mount point $MOUNT_POINT missing."
+			exit 1
+		fi
+
+		echo "Mounting Data partition."
+
+		mount -t ext4 -o rw $BULK_PART $MOUNT_POINT
+		if [ $? != 0 ]; then
+			echo "Mounting Data failed."
+			exit 1
+		fi
+		;;
+	stop)
+
+		echo "Unmounting Data partition."
+
+		if grep $MOUNT_POINT /proc/mounts > /dev/null; then 
+			umount $MOUNT_POINT 
+			if [ $? != 0 ]; then
+				echo "Unmounting Data failed."
+				exit 1
+			fi
+		else
+			echo "Data not mounted."
+		fi
+		;;
+
+	restart)	
+		$0 stop
+		$0 start
+		;;
+	*)
+		echo "Usage: $0 {start|stop|restart}"
+		exit 1
+		;;
+esac
+exit 0
