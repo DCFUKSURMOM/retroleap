@@ -11,7 +11,7 @@ define LIBRETRO_GPSP_BUILD_CMDS
 endef
 
 define LIBRETRO_GPSP_INSTALL_TARGET_CMDS
-	$(INSTALL) -D $(@D)/gpsp_libretro.so \
+	$(INSTALL) -D $(@D)/gpsp_libretro.dll \
 		$(TARGET_DIR)/usr/lib/libretro/gpsp_libretro.so
 endef
 
