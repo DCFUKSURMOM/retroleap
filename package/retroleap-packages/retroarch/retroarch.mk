@@ -7,7 +7,7 @@
 RETROARCH_VERSION = v1.20.0
 RETROARCH_SITE = $(call github,libretro,retroarch,$(RETROARCH_VERSION))
 RETROARCH_LICENSE = GPLv3+
-RETROARCH_CONF_OPTS += --disable-oss --enable-zlib --disable-ffmpeg
+RETROARCH_CONF_OPTS += --disable-oss --enable-zlib
 RETROARCH_DEPENDENCIES = host-pkgconf libretro-core-info
 
 # SDL2 on retroarch will cause retroleap to bootloop
@@ -48,9 +48,14 @@ ifeq ($(BR2_cortex_a15),y)
         RETROARCH_CONF_OPTS += --enable-neon --enable-floathard
 endif
 
-# x86 : no option
-
 RETROARCH_CONF_OPTS += --enable-networking
+
+ifeq ($(BR2_PACKAGE_FFMPEG),y)
+RETROARCH_CONF_OPTS += --enable-ffmpeg
+RETROARCH_DEPENDENCIES += ffmpeg
+else
+RETROARCH_CONF_OPTS += --disable-ffmpeg
+endif
 
 ifeq ($(BR2_PACKAGE_PYTHON3),y)
 RETROARCH_CONF_OPTS += --enable-python
