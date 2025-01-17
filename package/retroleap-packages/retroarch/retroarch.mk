@@ -12,10 +12,10 @@ RETROARCH_DEPENDENCIES = host-pkgconf libretro-core-info
 
 # SDL2 on retroarch will cause retroleap to bootloop
 # For now, use SDL1 only regardless of the presence of SDL2
-#ifeq ($(BR2_PACKAGE_SDL2),y)
-#	RETROARCH_CONF_OPTS += --enable-sdl2
-#	RETROARCH_DEPENDENCIES += sdl2
-#else
+ifeq ($(BR2_PACKAGE_SDL2),y)
+	RETROARCH_CONF_OPTS += --enable-sdl2
+	RETROARCH_DEPENDENCIES += sdl2
+else
 	RETROARCH_CONF_OPTS += --disable-sdl2
 	ifeq ($(BR2_PACKAGE_SDL),y)
 		RETROARCH_CONF_OPTS += --enable-sdl
@@ -23,7 +23,7 @@ RETROARCH_DEPENDENCIES = host-pkgconf libretro-core-info
 	else
 		RETROARCH_CONF_OPTS += --disable-sdl
 	endif
-#endif
+endif
 
 # RPI 0 and 1
 ifeq ($(BR2_arm1176jzf_s),y)
