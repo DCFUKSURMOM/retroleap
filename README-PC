@@ -1,0 +1,75 @@
+PC:
+
+make retroleap-x86_defconfig (x86 32 bit) or make retroleap-x64_defconfig (x86 64 bit)
+
+make menuconfig (optional, change whatever you want to change here - adding cores, etc.)
+
+make linux-menuconfig (optional, used to tweak the kernel config, if linux-menuconfig does not work try linux-nconfig.)
+
+make (you can add -jX (where x is the number of cpu threads) to this to speed up builds, it is recommended to not set all available threads to avoid locking up your system (-j2 on a 4 core, 4 thread cpu for example, although im a massochist and i personally do -j3)
+
+kernel and rootfs images will be in output/images (bzImage, rootfs.tar)
+
+PC Install instructions (Legacy Boot):
+
+Remove the hard drive from your target machine and connect it to your computer with the appropriate adapter (IDE/SATA/NVME to USB adapter)
+
+Create an ext4 or btrfs partition as the first partition on your hard drive (leave some space free at the end if you want a swap partition, recommended size is at least half the size of your ram, so 512MB if you have 1GB of ram for example), make sure it marked as bootable
+
+Mount the partition and copy rootfs.tar to it as root
+
+Switch to the directory you mounted the root at
+
+Extract the rootfs tar as root with tar xvpf rootfs.tar
+
+Remove rootfs.tar when it finishes
+
+bzImage should already be in boot/ in the root partition and a sample grub.cfg should be in boot/grub/grub.cfg
+
+Create a swap partition (optional but recommended) as the second partition on your hard drive
+
+Switch to the directory you mounted the root to and edit etc/fstab in the root partiton to include this (change sdXx to match the drive and partition number for the swap partition):
+/dev/sdXx	none		swap	defaults	0	0
+
+Install the grub bootloader, make sure you are still in the directory you mounted your root partition to (replace /dev/sdX with the path to your target drive):
+sudo grub-install --target=i386-pc --verbose --themes=none --boot-directory=boot/ /dev/sdX
+
+unmount the root partition and put the hard drive back into your target machine
+
+Boot.
+
+PC Install instructions (UEFI Boot):
+
+Remove the hard drive from your target machine and connect it to your computer with the appropriate adapter (IDE/SATA/NVME to USB adapter)
+
+It is recommended (but usually not required) that your hard drive has a GPT partition table, as per the UEFI specification
+
+Create a 20MB fat partition at the first partiton on your hard drive, but do not mount it yet. Make sure it is marked as bootable (on mbr and gpt) and is marked as an esp partition (gpt only)
+
+Create an ext4 or btrfs partition as the second partition on your hard drive (leave some space free at the end if you want a swap partition, recommended size is at least half the size of your ram, so 512MB if you have 1GB of ram for example)
+
+Mount the partition and copy rootfs.tar to it as root
+
+Switch to the directory you mounted the root at
+
+Extract the rootfs tar as root with tar xvpf rootfs.tar
+
+Remove rootfs.tar when it finishes
+
+bzImage should already be in boot/ in the root partition and a sample grub.cfg should be in boot/grub/grub.cfg
+
+Create a directory named efi in the boot directory
+
+Mount the first partition you created to this the efi directory
+
+Create a swap partition (optional but recommended) as the third partition on your hard drive
+
+Switch to the directory you mounted the root to and edit etc/fstab in the root partiton to include this (change sdXx to match the drive and partition number for the swap partition):
+/dev/sdXx	none		swap	defaults	0	0
+
+Install the grub bootloader, make sure you are still in the directory you mounted your root partition to (replace /dev/sdX with the path to your target drive):
+sudo grub-install --target=x86_64-efi (or --target=i386-efi if on a 32 bit UEFI machine) --verbose --themes=none --boot-directory=boot/ --efi-directory=boot/efi --removable /dev/sdX
+
+unmount the partitions and put the hard drive back into your target machine
+
+Boot.
