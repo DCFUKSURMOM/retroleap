@@ -16,7 +16,7 @@ On ubuntu/debian/etc: sudo apt install sg3-utils git python
 git clone https://github.com/DCFUKSURMOM/sshflash.git
 cd sshflash
 
-3. Download the latest release .tar.gz file at:
+3. Download the latest release .tar.zst file at:
 
 https://github.com/DCFUKSURMOM/retroleap/releases
 
