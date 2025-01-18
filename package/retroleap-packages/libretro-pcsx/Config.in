@@ -1,5 +1,6 @@
 config BR2_PACKAGE_LIBRETRO_PCSX
         bool "libretro-pcsx"
+	depends on !BR2_x86_pentium3
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
         help
@@ -9,3 +10,5 @@ config BR2_PACKAGE_LIBRETRO_PCSX
 
 comment "LIBRETRO_PCSX needs a toolchain w/ C++"
 	depends on !BR2_INSTALL_LIBSTDCPP
+comment "LIBRETRO_PCSX seems to require a CPU with SSE2 support"
+	depends on BR2_x86_pentium3
