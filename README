@@ -91,8 +91,8 @@ You can use df -h to see how much space you have available:
 ssh -i ~/sshflash/keys/id_rsa root@169.254.6.1 'df -h /roms'
 
 
-Emergency:
-If you're stuck and your device is in a weird state, you can always go back to the stock leapster OS by booting your device in Surgeon mode (hold L + R shoulder buttons while powering up), and connecting to the Leapfrog Connect app. This will allow you to restore the stock leapster OS on the device.
+Emergency (Leapfrog only):
+If you're stuck and your device is in a weird state, you can always try again by booting your device in Surgeon mode (hold L + R shoulder buttons while powering up). Unfortunately the LeapFrog Connect app has been mostly shut down so it is no longer possible to easily restore the stock OS on leapfrog devices.
 
 Additionally, you can get serial access to the device either via the cartridge port, or via a header on the inside of the device.
 
