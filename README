@@ -5,23 +5,22 @@ You can easily download and install retroleap on your leapsterGS system! To do t
 
 -------------------------------------------------------------------------------
 
-Installing:
+Installing (leapfrog devices):
 
 1. Install the necessary dependencies:
 
 On ubuntu/debian/etc: sudo apt install sg3-utils git python
 
-2. Clone sshflash (the git checkout command is required for flashing Retroleap 2.0.0 Alpha 4 and below)
+2. Clone sshflash (only for leapfrog devices)
 
-git clone https://github.com/mac2612/sshflash.git
+git clone https://github.com/DCFUKSURMOM/sshflash.git
 cd sshflash
-git checkout 9db71e4
 
 3. Download the latest release .tar.gz file at:
 
-https://github.com/mac2612/retroleap/releases
+https://github.com/DCFUKSURMOM/retroleap/releases
 
-4. Extract the release file into the sshflash directory. You should now have the uImage, rootfs.ubifs, and surgeon_zImage files in your sshflash directory.
+4. Extract the release file into the sshflash directory. You should now have the uImage, rootfs.tar, and surgeon_zImage files in your sshflash directory.
 
 5. Plug your Leapster into a USB port on your PC. Turn it on while holding the L and R shoulder buttons, along with the hint button. 
 You should see an image of a leapster connected to a PC on the leapster's screen. If your Leapster goes through the usual boot sequence (LeapFrog logo, boot chime) before the connected screen, you've done it wrong.
@@ -62,7 +61,7 @@ LeapPad2 has quite a limited button layout, so it may not be good for systems wi
 
 
 Default Cores:
-
+(some of these arent building currently)
 atari800 - a tweaked atari800 emulator modified for leapster by JabberwockPL
 catsfc - SNES emulator. Performance is alright depending on the game.
 fceumm - NES emulator, good speed and fairly accurate.
@@ -73,7 +72,7 @@ pocketsnes - SNES emulator, runs some games well but slow on others.
 quicknes - NES emulator, low accuracy but very fast.
 
 
-Adding ROMs:
+Adding ROMs (leapfrog devices):
 
 When you attach a booted leapster device running retroleap, it will show up as a network interface.
 Retroleap will give your PC an IP on this interface in the 169.254.6.X space. The leapster is accessible on 169.254.6.1, using the private key supplied with sshflash.
@@ -103,25 +102,23 @@ Retroleap does not replace the stock bootloader, so unless something really nast
 Doing your own build:
 
 To do a build, clone the source tree with git.
-Then do this:
+Then refer to the readme file for your device:
 
-make lfXXXX_defconfig (where XXXX is the board version you are building i.e. lf1000, lf2000 or lf3000)
-make menuconfig (change whatever you want to change here - adding cores, etc.)
-make
-cp output/images/* ~/sshflash/ (equivalent for your system/location of SSHflash).
+Leapfrog build instructions are in README-LF
 
+Original Xbox build instructions are in README-XBOX
+
+PC build instructions will soon be in README-PC
 
 Wishlist/planned features:
 -More cores to support additional systems.
 -Overlay support for the tablet form-factor devices to make up for lack of buttons.
--Support for more leapster devices e.g. leapster explorer, didj(?), leappad, leappad3 and platinum.
--Overclocking support.
--Menuing other than the retroarch rgui menuing system.
 
 If you'd like to get involved with this project, please get in touch! New contributors are always welcome :)
 
 
 Shoutouts/thank yous:
+-mac2612 (https://github.com/mac2612) for the original retroleap project. Hopefully one day he will return
 -JabberwockPL (https://github.com/JabberwockPL) for being a trusted tester and collaborator, and doing cool stuff with atari800 cores, which will soon be integrated into retroleap!
 -Special thanks for jrspruitt (https://github.com/jrspruitt) who wrote a bunch of the low-level code to talk to leapfrog's bootloader as part of OpenLFConnect
 -The retroarch team and all the folks writing ARM-optimized cores that run so well on very dinky ARM systems (notaz especially!)

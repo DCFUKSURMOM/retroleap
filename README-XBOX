@@ -1,0 +1,44 @@
+Original Xbox (requires cromwell bios or some other method of loading linux):
+
+make retroleap-xbox_defconfig
+
+make menuconfig (optional, change whatever you want to change here - adding cores, etc.)
+
+make linux-menuconfig (optional, used to tweak the kernel config, if linux-menuconfig does not work try linux-nconfig.)
+
+make (you can add -jX (where x is the number of cpu threads) to this to speed up builds, it is recommended to not set all available threads to avoid locking up your system (-j2 on a 4 core, 4 thread cpu for example, although im a massochist and i personally do -j3)
+
+kernel and rootfs images will be in output/images (bzImage, rootfs.tar)
+
+Xbox Install instructions (for cromwell bios):
+
+This has been tested in the XEMU Xbox emulator (https://xemu.app https://github.com/xemu-project/xemu), I do not own an actual xbox to test on
+
+Unlock your Xbox hard drive from the settings in Cromwell
+
+Remove the hard drive from your Xbox and connect it to your computer using an IDE to USB adapter
+
+Make sure your xbox hard drive has an MBR/DOS partition table
+
+Create a 20M fat partition as the first partition on your Xbox hard drive, make sure its marked as bootable/active
+
+Mount the partition and copy bzImage and linuxboot.cfg (in board/retroleap/xbox/boot) to it
+
+Create an ext4 or btrfs partition as the second partition on your Xbox hard drive (leave some space free at the end if you want a swap partition, recommended size is 256M)
+
+Mount the partition and copy rootfs.tar to it as root
+
+Switch to the directory you mounted the root at
+
+Extract the rootfs tar as root with tar xvpf rootfs.tar
+
+Remove rootfs.tar when it finishes
+
+Create a swap partition (optional but recommended) as the third partition on your Xbox hard drive, recommended size is 256M
+
+Switch to the directory you mounted the root to and edit etc/fstab to include this:
+/dev/sda3	none		swap	defaults	0	0
+
+Unmount all partitions and put the hard drive back into the Xbox
+
+Boot your Xbox, the kernel may take a while to start, this is a known issue.

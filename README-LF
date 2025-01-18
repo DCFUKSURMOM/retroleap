@@ -1,0 +1,30 @@
+Leapfrog Devices:
+For leapfrog devices, the kernel has to be built seperately becuase the filesystem toolchain is to new to build the kernel, and the kernel toolchain is to old to build the filesystem
+Build commands:
+
+make xxxx_defconfig (where xxxx is the model, valid options are lf1000_kernel_defconfig, lf1000_kernel_didj_defconfig, lf1000_kernel_leappad_defconfig, lf2000_kernel_defconfig, lf2000_kernel_rt_defconfig, lf2000_kernel_oc_defconfig and lf3000_kernel_defconfig)
+
+make linux-menuconfig (optional, used to tweak the kernel config, if linux-menuconfig does not work try linux-nconfig.)
+
+make (you can add -jX (where x is the number of cpu threads) to this to speed up builds, it is recommended to not set all available threads to avoid locking up your system (-j2 on a 4 core, 4 thread cpu for example, although im a massochist and i personally do -j3)
+
+rm -rf output/build
+
+rm -rf output/host
+
+these 2 commands will force buildroot to reconfigure the toolchain without having to do a full clean
+
+make xxxx_defconfig (where xxxx is the model, valid options are lf1000_rootfs_defconfig, lf1000_rootfs_didj_defconfig, lf1000_rootfs_leappad_defconfig, lf2000_rootfs_defconfig, lf2000_rootfs_rt_defconfig, lf2000_rootfs_oc_defconfig and lf3000_rootfs_defconfig)
+
+make menuconfig (optional, change whatever you want to change here - adding cores, etc.)
+
+make (you can add -jX (where x is the number of cpu threads) to this to speed up builds, it is recommended to not set all available threads to avoid locking up your system (-j2 on a 4 core, 4 thread cpu for example, although im a massochist and i personally do -j3)
+
+kernel and rootfs images will be in output/images (uImage (or zImage depending on device), rootfs.tar.gz), files will need to be renamed depending on your device to work with sshflash. 
+
+valid kernel file names for sshflash are lf1000_zImage, lf1000_didj_zImage, lf1000_leappad_zImage, lf2000_uImage, lf2000_oc_uImage, lf2000_rt_uImage, and lf3000_uImage
+
+valid rootfs file names for sshflash are lf1000_rootfs.tar.gz, lf1000_didj_rootfs.tar.gz, lf1000_leappad_rootfs.tar.gz, lf2000_rootfs.tar.gz, lf2000_oc_rootfs.tar.gz, lf2000_rt_rootfs.tar.gz, and lf3000_rootfs.tar.gz.
+
+copy the renamed files to the sshflash directory (refer to the flashing part of the install step at the beggining of this readme), you will also need the matching surgeon image for your device, which you can extract from the latest release tar.zst
+(https://github.com/DCFUKSURMOM/retroleap/releases). surgeon images currently cannot be built until i adapt the configs (low priority since they are just used for flashing) so i included the old versions that still work.
