@@ -2,7 +2,6 @@ config BR2_PACKAGE_LIBRETRO_SWANSTATION
     bool "libretro-swanstation"
 	depends on BR2_PACKAGE_RETROARCH
 	depends on BR2_INSTALL_LIBSTDCPP
-	depends on BR2_PACKAGE_HOST_CMAKE
     help
       SwanStation is a hard fork and open-source Libretro core implementation of DuckStation, focusing on playability, speed, and long-term maintainability for the PlayStation console.
 
