@@ -1,14 +1,19 @@
 ################################################################################
 #
-# RETROARCH-ASSETS
+# retroarch-assets
 #
 ################################################################################
-RETROARCH_ASSETS_DEPENDS = retroarch
+
+RETROARCH_ASSETS_VERSION = master
+RETROARCH_ASSETS_SITE = $(call github,libretro,retroarch-assets,$(RETROARCH_ASSETS_VERSION))
+RETROARCH_ASSETS_LICENSE = GPL-3.0
+RETROARCH_ASSETS_LICENSE_FILES = COPYING
 
 define RETROARCH_ASSETS_INSTALL_TARGET_CMDS
-	echo This is hacky AF but it seems to work...
-	wget --directory-prefix=$(@D)/ https://github.com/libretro/retroarch-assets/releases/download/Latest/assets.7z
-	7z x $(@D)/assets.7z -o$(TARGET_DIR)/configs/.config/retroarch/assets
+    mkdir -p $(TARGET_DIR)/configs/.config/retroarch/assets
+    rm -r $(@D)/Makefile
+    rm -r $(@D)/configure
+    cp -r $(@D)/* $(TARGET_DIR)/configs/.config/retroarch/assets/
 endef
 
 $(eval $(generic-package))
