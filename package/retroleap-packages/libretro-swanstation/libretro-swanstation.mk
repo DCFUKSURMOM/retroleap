@@ -12,7 +12,7 @@ LIBRETRO_SWANSTATION_LICENSE_FILES = LICENSE
 
 define LIBRETRO_SWANSTATION_INSTALL_TARGET_CMDS
     $(INSTALL) -D -m 0755 $(@D)/bin/* \
-        $(TARGET_DIR)/usr/lib/*
+        $(TARGET_DIR)/usr/lib/
     $(INSTALL) -D -m 0755 $(@D)/swanstation_libretro.so \
         $(TARGET_DIR)/usr/lib/libretro/swanstation_libretro.so
 endef
