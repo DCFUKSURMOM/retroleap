@@ -31,7 +31,7 @@ You should see an image of a leapster connected to a PC on the leapster's screen
 
 7. Wait for sshflash to do its thing.
 
-8. If all goes well, your leapfrog device should reboot into GMenu2x!
+8. If all goes well, your leapfrog device should reboot into Retroarch!
 
 9. These instructions have been tested on Ubuntu 18.04, Ubuntu 18.10, MX-21.3, and Pop!_OS 21.04. If you run into trouble, please open a bug!
 
