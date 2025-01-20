@@ -324,7 +324,6 @@ if BR2_PACKAGE_RETROARCH
        source "package/retroleap-packages/libretro-gambatte/Config.in"
        source "package/retroleap-packages/libretro-stella/Config.in"
        source "package/retroleap-packages/libretro-pcsx/Config.in"
-       source "package/retroleap-packages/libretro-swanstation/Config.in"
        source "package/retroleap-packages/libretro-fceumm/Config.in"
        source "package/retroleap-packages/libretro-fceunext/Config.in"
        source "package/retroleap-packages/libretro-nestopia/Config.in"
