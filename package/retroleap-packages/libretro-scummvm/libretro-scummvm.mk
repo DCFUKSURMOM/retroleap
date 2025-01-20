@@ -9,7 +9,7 @@ LIBRETRO_SCUMMVM_SITE = $(call github,libretro,scummvm,$(LIBRETRO_SCUMMVM_VERSIO
 define LIBRETRO_SCUMMVM_BUILD_CMDS
 	CFLAGS="$(TARGET_CFLAGS)" CXXFLAGS="$(TARGET_CXXFLAGS)" LDFLAGS="-shared -Wl,--no-undefined" $(MAKE) \
 	TOOLSET="$(TARGET_CROSS)" \
-	-C $(@D)/backends/platform/libretro/build platform="$(LIBRETRO_PLATFORM)"
+	-C $(@D)/backends/platform/libretro/build platform=unix
 endef
 
 define LIBRETRO_SCUMMVM_INSTALL_TARGET_CMDS
