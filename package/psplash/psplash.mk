@@ -14,9 +14,9 @@ PSPLASH_DEPENDENCIES = host-gdk-pixbuf host-pkgconf
 
 ifeq ($(BR2_PACKAGE_SYSTEMD),y)
 PSPLASH_DEPENDENCIES += systemd
-PSPLASH_CONF_OPTS += --with-systemd
+PSPLASH_CONF_OPTS += --with-systemd --disable-progress-bar
 else
-PSPLASH_CONF_OPTS += --without-systemd
+PSPLASH_CONF_OPTS += --without-systemd --disable-progress-bar
 endif
 
 PSPLASH_IMAGE = $(call qstrip,$(BR2_PACKAGE_PSPLASH_IMAGE))

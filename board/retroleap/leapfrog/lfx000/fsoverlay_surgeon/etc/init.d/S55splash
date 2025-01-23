@@ -1,0 +1,5 @@
+#!/bin/sh
+echo 1 > /sys/devices/platform/lf2000-fb.0/graphics/fb1/blank
+echo 1 > /sys/devices/platform/lf2000-fb.0/graphics/fb2/blank
+echo 0 > /sys/devices/platform/lf2000-fb.0/graphics/fb0/blank
+psplash -f 1 &
