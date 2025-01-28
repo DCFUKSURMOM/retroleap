@@ -4,11 +4,18 @@
 #
 ################################################################################
 
-RETROARCH_VERSION = v1.20.0
+RETROARCH_VERSION = 
 RETROARCH_SITE = $(call github,libretro,retroarch,$(RETROARCH_VERSION))
 RETROARCH_LICENSE = GPLv3+
 RETROARCH_CONF_OPTS += --disable-oss --enable-zlib
 RETROARCH_DEPENDENCIES = host-pkgconf libretro-core-info
+
+#set lower retroarch version if ppc is enabled
+ifeq ($(BR2_powerpc),y)
+RETROARCH_VERSION += v1.14.0
+else
+RETROARCH_VERSION += v1.20.0
+endif
 
 # SDL2 on retroarch will cause retroleap to bootloop
 # For now, use SDL1 only regardless of the presence of SDL2
