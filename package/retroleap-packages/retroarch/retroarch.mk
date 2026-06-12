@@ -14,7 +14,7 @@ RETROARCH_DEPENDENCIES = host-pkgconf libretro-core-info
 ifeq ($(BR2_powerpc),y)
 RETROARCH_VERSION += v1.14.0
 else
-RETROARCH_VERSION += v1.20.0
+RETROARCH_VERSION += v1.22.2
 endif
 
 # SDL2 on retroarch will cause retroleap to bootloop
